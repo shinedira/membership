@@ -1,0 +1,29 @@
+{
+    "name": "timedoor/tmd-membership",
+    "description": "Membership package timedoor",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edwin Diradinata",
+            "email": "edwin@timedoor.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/sanctum": "^2.11",
+        "laravelcollective/html": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Timedoor\\TmdMembership\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Timedoor\\TmdMembership\\TmdMembershipProvider"
+            ]
+        }
+    },
+    "prefer-stable": true
+}
