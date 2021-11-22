@@ -66,8 +66,6 @@ use Fcmable;
 ```
 
 >## Membership Ready To Use
-
-<br />
 <br />
 
 ## API Url
@@ -81,12 +79,12 @@ use Fcmable;
 | Check | `{{url}}/otp/check` | POST |
 
 <br />
-<br />
 
 ## You can get current FCM token
 ```php
 $request->user()->currentFcmToken()->token
 ```
+<br />
 <br />
 
 # Thank You
