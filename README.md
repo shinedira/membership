@@ -68,6 +68,10 @@ use Fcmable;
 >## Membership Ready To Use
 <br />
 
+## Admin Url
+```
+{{url}}/admin/dashboard
+```
 ## API Url
 | Module | Url | Method |
 | --- | --- | --- |
@@ -77,8 +81,6 @@ use Fcmable;
 | OTP | --- | --- |
 | Request | `{{url}}/otp/request` | POST |
 | Check | `{{url}}/otp/check` | POST |
-
-<br />
 
 ## You can get current FCM token
 ```php
