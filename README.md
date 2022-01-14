@@ -87,6 +87,11 @@ use Fcmable;
 $request->user()->currentFcmToken()->token
 ```
 <br />
+
+###CRM Docs
+https://band-othnielia-951.notion.site/Fcm-Package-431e6af9f4994da0bebff360c702c04e
 <br />
+<br />
+
 
 # Thank You
