@@ -12,7 +12,7 @@
     "require": {
         "laravel/sanctum": "^2.11",
         "laravelcollective/html": "^6.2",
-	"laravel-notification-channels/fcm": "^2.2"
+	      "laravel-notification-channels/fcm": "^2.2"
     },
     "autoload": {
         "psr-4": {
