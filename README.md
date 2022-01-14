@@ -14,7 +14,7 @@ Publish config & migration
 ```
 php artisan vendor:publish --tag=tmd-membership
 ```
-- this will copy config `tmd-membership` and migration files
+>  this will copy config `tmd-membership` and migration files
 
 
 After that you can run 
@@ -28,8 +28,8 @@ After migration complete you have to add this section to `composer.json`
         "app/Helpers/membership.php"
     ]
 ```
-- you can see detail of code here
-- ```json
+ you can see detail of code here
+```json
     "autoload-dev": {
             "psr-4": {
                 "Tests\\": "tests/"
@@ -38,7 +38,7 @@ After migration complete you have to add this section to `composer.json`
                 "app/Helpers/membership.php"
             ]
         },
-    ```
+```
 
 Reload autoload
 ```
