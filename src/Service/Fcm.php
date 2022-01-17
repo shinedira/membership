@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Service;
+namespace Timedoor\TmdMembership\Service;
 
-use App\Infrastructure\Contracts\HasRoutesNotifications;
-use App\Notifications\FcmStarter;
+use Timedoor\TmdMembership\Notifications\FcmStarter;
 use Illuminate\Support\Facades\Log;
+use Timedoor\TmdMembership\Infrastructure\Contracts\HasRoutesNotifications;
 
 class Fcm
 {
     /**
      * Create a broadcast to send FCM Notification.
      *
-     * @param  \App\Infrastructure\Contracts\HasRoutesNotifications  $model
+     * @param  \Timedoor\TmdMembership\Infrastructure\Contracts\HasRoutesNotifications  $model
      * @param  array $content
      *
      * @return void

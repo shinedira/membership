@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Contracts;
+namespace Timedoor\TmdMembership\Infrastructure\Contracts;
 
 /**
  * @see \Illuminate\Notifications\RoutesNotifications

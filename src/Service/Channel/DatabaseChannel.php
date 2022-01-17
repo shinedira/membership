@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Channel;
+namespace Timedoor\TmdMembership\Service\Channel;
 
 use Illuminate\Notifications\Channels\DatabaseChannel as ChannelsDatabaseChannel;
 use Illuminate\Notifications\Notification;
