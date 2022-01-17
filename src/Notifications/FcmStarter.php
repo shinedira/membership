@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Notifications;
+namespace Timedoor\TmdMembership\Notifications;
 
-use App\Service\Channel\DatabaseChannel;
+use Timedoor\TmdMembership\Service\Channel\DatabaseChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -10,7 +10,7 @@ use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
 
 /**
- * @see \App\Service\Fcm
+ * @see \Timedoor\TmdMembership\Service\Fcm
  */
 class FcmStarter extends Notification implements ShouldQueue
 {
