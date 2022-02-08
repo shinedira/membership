@@ -16,7 +16,7 @@ class TmdMembershipProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/Config/tmd-membership.php', 'tmd-membership'
+            __DIR__ . '/config/tmd-membership.php', 'tmd-membership'
         );
     }
 
