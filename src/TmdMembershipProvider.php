@@ -4,7 +4,7 @@ namespace Timedoor\TmdMembership;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
-use Timedoor\TmdMembership\macros\AuthAttemptMacro;
+use Timedoor\TmdMembership\Macros\AuthAttemptMacro;
 
 class TmdMembershipProvider extends ServiceProvider
 {
