@@ -1,6 +1,6 @@
 <?php
 
-namespace Timedoor\TmdMembership\macros;
+namespace Timedoor\TmdMembership\Macros;
 
 use Illuminate\Http\Request;
 
