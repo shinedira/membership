@@ -2,7 +2,9 @@
 
 namespace NotificationChannels\Fcm;
 
+use Illuminate\Support\Traits\Macroable;
 use Kreait\Firebase\Messaging\Message;
+use NotificationChannels\Fcm\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Fcm\Resources\AndroidConfig;
 use NotificationChannels\Fcm\Resources\ApnsConfig;
 use NotificationChannels\Fcm\Resources\FcmOptions;
@@ -11,6 +13,8 @@ use NotificationChannels\Fcm\Resources\WebpushConfig;
 
 class FcmMessage implements Message
 {
+    use Macroable;
+
     /**
      * @var string|null
      */
@@ -75,7 +79,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param string|null $name
+     * @param  string|null  $name
      * @return FcmMessage
      */
     public function setName(?string $name): self
@@ -94,11 +98,19 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param array|null $data
+     * @param  array<string, string>|null  $data
      * @return FcmMessage
+     *
+     * @throws \NotificationChannels\Fcm\Exceptions\CouldNotSendNotification
      */
     public function setData(?array $data): self
     {
+        foreach ($data as $key => $item) {
+            if (! is_string($item)) {
+                throw CouldNotSendNotification::invalidPropertyInArray($key);
+            }
+        }
+
         $this->data = $data;
 
         return $this;
@@ -113,7 +125,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param Notification|null $notification
+     * @param  Notification|null  $notification
      * @return FcmMessage
      */
     public function setNotification(?Notification $notification): self
@@ -132,7 +144,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param AndroidConfig|null $android
+     * @param  AndroidConfig|null  $android
      * @return FcmMessage
      */
     public function setAndroid(?AndroidConfig $android): self
@@ -151,7 +163,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param WebpushConfig|null $webpush
+     * @param  WebpushConfig|null  $webpush
      * @return FcmMessage
      */
     public function setWebpush(?WebpushConfig $webpush): self
@@ -170,7 +182,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param ApnsConfig|null $apns
+     * @param  ApnsConfig|null  $apns
      * @return FcmMessage
      */
     public function setApns(?ApnsConfig $apns): self
@@ -189,7 +201,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param FcmOptions|null $fcmOptions
+     * @param  FcmOptions|null  $fcmOptions
      * @return FcmMessage
      */
     public function setFcmOptions(?FcmOptions $fcmOptions): self
@@ -208,7 +220,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param string|null $token
+     * @param  string|null  $token
      * @return FcmMessage
      */
     public function setToken(?string $token): self
@@ -227,7 +239,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param string|null $topic
+     * @param  string|null  $topic
      * @return FcmMessage
      */
     public function setTopic(?string $topic): self
@@ -246,7 +258,7 @@ class FcmMessage implements Message
     }
 
     /**
-     * @param string|null $condition
+     * @param  string|null  $condition
      * @return FcmMessage
      */
     public function setCondition(?string $condition): self
@@ -258,7 +270,7 @@ class FcmMessage implements Message
 
     public function toArray()
     {
-        return [
+        $data = [
             'name' => $this->getName(),
             'data' => $this->getData(),
             'notification' => ! is_null($this->getNotification()) ? $this->getNotification()->toArray() : null,
@@ -266,12 +278,27 @@ class FcmMessage implements Message
             'webpush' => ! is_null($this->getWebpush()) ? $this->getWebpush()->toArray() : null,
             'apns' => ! is_null($this->getApns()) ? $this->getApns()->toArray() : null,
             'fcm_options' => ! is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
-            'token' => $this->getToken(),
-            'topic' => $this->getTopic(),
-            'condition' => $this->getCondition(),
         ];
+
+        if ($token = $this->getToken()) {
+            $data['token'] = $token;
+        }
+
+        if ($topic = $this->getTopic()) {
+            $data['topic'] = $topic;
+        }
+
+        if ($condition = $this->getCondition()) {
+            $data['condition'] = $condition;
+        }
+
+        return $data;
     }
 
+    /**
+     * @return mixed
+     */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

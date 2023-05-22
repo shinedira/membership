@@ -10,9 +10,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^3.0",
         "laravelcollective/html": "^6.2",
-        "laravel-notification-channels/fcm": "^2.2"
+        "laravel-notification-channels/fcm": "^3.2"
     },
     "autoload": {
         "psr-4": {

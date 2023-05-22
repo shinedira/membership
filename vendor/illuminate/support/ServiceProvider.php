@@ -97,8 +97,12 @@ abstract class ServiceProvider
      */
     public function callBootingCallbacks()
     {
-        foreach ($this->bootingCallbacks as $callback) {
-            $this->app->call($callback);
+        $index = 0;
+
+        while ($index < count($this->bootingCallbacks)) {
+            $this->app->call($this->bootingCallbacks[$index]);
+
+            $index++;
         }
     }
 
@@ -109,8 +113,12 @@ abstract class ServiceProvider
      */
     public function callBootedCallbacks()
     {
-        foreach ($this->bootedCallbacks as $callback) {
-            $this->app->call($callback);
+        $index = 0;
+
+        while ($index < count($this->bootedCallbacks)) {
+            $this->app->call($this->bootedCallbacks[$index]);
+
+            $index++;
         }
     }
 
@@ -425,5 +433,15 @@ abstract class ServiceProvider
     public function isDeferred()
     {
         return $this instanceof DeferrableProvider;
+    }
+
+    /**
+     * Get the default providers for a Laravel application.
+     *
+     * @return \Illuminate\Support\DefaultProviders
+     */
+    public static function defaultProviders()
+    {
+        return new DefaultProviders;
     }
 }

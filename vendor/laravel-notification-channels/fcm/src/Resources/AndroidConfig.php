@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\Fcm\Resources;
 
+use NotificationChannels\Fcm\Exceptions\CouldNotSendNotification;
+
 class AndroidConfig implements FcmResource
 {
     /**
@@ -56,7 +58,7 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param string|null $collapseKey
+     * @param  string|null  $collapseKey
      * @return AndroidConfig
      */
     public function setCollapseKey(?string $collapseKey): self
@@ -75,7 +77,7 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param AndroidMessagePriority|null $priority
+     * @param  AndroidMessagePriority|null  $priority
      * @return AndroidConfig
      */
     public function setPriority(?AndroidMessagePriority $priority): self
@@ -94,7 +96,7 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param string|null $ttl
+     * @param  string|null  $ttl
      * @return AndroidConfig
      */
     public function setTtl(?string $ttl): self
@@ -113,7 +115,7 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param string|null $restrictedPackageName
+     * @param  string|null  $restrictedPackageName
      * @return AndroidConfig
      */
     public function setRestrictedPackageName(?string $restrictedPackageName): self
@@ -132,11 +134,19 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param array|null $data
+     * @param  array|null  $data
      * @return AndroidConfig
+     *
+     * @throws \NotificationChannels\Fcm\Exceptions\CouldNotSendNotification
      */
     public function setData(?array $data): self
     {
+        foreach ($data as $key => $item) {
+            if (! is_string($item)) {
+                throw CouldNotSendNotification::invalidPropertyInArray($key);
+            }
+        }
+
         $this->data = $data;
 
         return $this;
@@ -151,7 +161,7 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param AndroidNotification|null $notification
+     * @param  AndroidNotification|null  $notification
      * @return AndroidConfig
      */
     public function setNotification(?AndroidNotification $notification): self
@@ -170,7 +180,7 @@ class AndroidConfig implements FcmResource
     }
 
     /**
-     * @param AndroidFcmOptions|null $fcmOptions
+     * @param  AndroidFcmOptions|null  $fcmOptions
      * @return AndroidConfig
      */
     public function setFcmOptions(?AndroidFcmOptions $fcmOptions): self
@@ -187,7 +197,7 @@ class AndroidConfig implements FcmResource
     {
         return [
             'collapse_key' => $this->getCollapseKey(),
-            'priority' => ! is_null($this->getPriority()) ? $this->getPriority()->label ?? $this->getPriority()->getValue() : null,
+            'priority' => $this->getPriority()?->name,
             'ttl' => $this->getTtl(),
             'restricted_package_name' => $this->getRestrictedPackageName(),
             'data' => $this->getData(),
